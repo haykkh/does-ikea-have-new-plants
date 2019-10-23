@@ -93,7 +93,7 @@ gulp.task('scripts', function () {
 // Run Flask server
 gulp.task('runServer', function() {
   return new Promise(function(resolve, reject) {
-    cp.exec('python app.py')
+    cp.exec('python manage.py runserver')
     resolve()
   })
 })
