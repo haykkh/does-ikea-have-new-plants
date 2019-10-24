@@ -7,13 +7,15 @@ class Plant(db.Model):
     name = db.Column(db.String())
     price = db.Column(db.String())
     date = db.Column(db.Date())
+    url = db.Column(db.String())
     image = db.Column(db.String())
 
-    def __init__(self, id, name, price, date, image):
+    def __init__(self, id, name, price, date, url, image):
         self.id = id
         self.name = name
         self.price = price
         self.date = date
+        self.url = url
         self.image = image
 
     def __repr__(self):
@@ -26,5 +28,6 @@ class Plant(db.Model):
             'name': self.name,
             'price': self.price,
             'date': self.date,
+            'url': self.url,
             'image': self.image
         }
