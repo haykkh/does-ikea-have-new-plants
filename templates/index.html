@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
     <title>Does IKEA have new plants today?</title>
 </head>
 <body>
-    <h1>hi</h1>
+    <h1 id="update">{{ update }}</h1>
+    <ul>
+        {% for plant in plants %}
+            <li>
+                <a href={{ plant.1 }}>{{ plant.0 }}</a>
+
+            </li>
+        {% endfor %}
+    </ul>
+    
 </body>
 </html>
