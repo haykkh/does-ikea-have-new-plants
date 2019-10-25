@@ -46,7 +46,7 @@ def find_the_plants(ikea: str, db: Database) -> None:
             None
     """
 
-    forest = requests.get(ikea).json()['categoryProducts'][1]['products']
+    forest = requests.get(ikea).json()['productList'][0]['products']
 
     for plant in forest:
         planter(plant['attributes'], db)
