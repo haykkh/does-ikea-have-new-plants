@@ -18,7 +18,7 @@ def planter(p: dict, db: Database) -> str:
     try:
         plant = Plant(
             id = p['id'],
-            name = p['name'],
+            name = p['name'][0] + p['name'][1:].lower(),
             price = p['price'],
             date = date.today(),
             url = p['pip_url'],
