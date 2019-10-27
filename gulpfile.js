@@ -1,130 +1,102 @@
-// Plugins
-var gulp = require('gulp')
-var pjson = require('./package.json')
-var sass = require('gulp-sass')
-var autoprefixer = require('gulp-autoprefixer')
-var cssnano = require('gulp-cssnano')
-var rename = require('gulp-rename')
-var del = require('del')
-var plumber = require('gulp-plumber')
-var pixrem = require('gulp-pixrem')
-var uglify = require('gulp-uglify')
-var concat = require('gulp-concat')
-var cp = require('child_process')
-var browserSync = require('browser-sync').create()
 
-var reload = browserSync.reload
+// Load plugins
+const autoprefixer = require("autoprefixer");
+const browsersync = require("browser-sync").create();
+const cp = require("child_process");
+const cssnano = require("cssnano");
+const del = require("del");
+const gulp = require("gulp");
+const imagemin = require("gulp-imagemin");
+const newer = require("gulp-newer");
+const pixrem = require('gulp-pixrem');
+const pjson = require('./package.json');
+const plumber = require("gulp-plumber");
+const postcss = require("gulp-postcss");
+const sass = require("gulp-sass");
 
-var pathsConfig = function (appName) {
-  // Relative paths function
-  this.app = '../' + (appName || pjson.name)
-
-  return {
-    app: this.app,
-    templates: this.app + '/templates',
-    css: this.app + '/static/css',
-    fonts: this.app + '/static/css',
-    js: this.app + '/static/js'
-  }
+// BrowserSync (callback)
+function browserSync(done) {
+  browsersync.init({
+    proxy: 'localhost:5000'
+  });
+  done();
 }
 
-var sourcesConfig = function (paths) {
-  return {
-    js: [
-      paths.app + '/src/js/**/*.js'
-    ],
-    sass: [
-      paths.app + '/src/sass/*.scss'
-    ],
-    html: [
-      paths.app + '/src/html/*.html'
-    ],
-    images: [
-      paths.images + '/*'
-    ],
-    fonts: [
-      paths.app + '/src/fonts/**/*.ttf',
-      paths.app + '/src/fonts/**/*.woff'
-    ]
-  }
-};
+// BrowserSync Reload
+function browserSyncReload(done) {
+  browsersync.reload();
+  done();
+}
 
-var paths = pathsConfig()
-var sources = sourcesConfig(paths)
-/// /////////////////////////////
-// Tasks
-/// /////////////////////////////
+// Clean assets
+function clean() {
+  return del(["./static/"]);
+}
 
-// Clean task
-gulp.task('clean', function () {
-  return del([paths.app + '/static'])
-})
+// Optimize Images
+function images() {
+  return gulp
+    .src("./src/img/**/*")
+    .pipe(newer("./static/img"))
+    .pipe(
+      imagemin([
+        imagemin.gifsicle({ interlaced: true }),
+        imagemin.jpegtran({ progressive: true }),
+        imagemin.optipng({ optimizationLevel: 5 }),
+        imagemin.svgo({
+          plugins: [
+            {
+              removeViewBox: false,
+              collapseGroups: true
+            }
+          ]
+        })
+      ])
+    )
+    .pipe(gulp.dest("./static/img"));
+}
 
-// Styles autoprefixing and minification
-gulp.task('styles', function () {
-  return gulp.src(sources.sass)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(plumber()) // Checks for errors
-    .pipe(autoprefixer({ browsers: ['last 2 version'] })) // Adds vendor prefixes
-    .pipe(pixrem()) // add fallbacks for rem units
-    .pipe(gulp.dest(paths.css))
-    .pipe(browserSync.reload({ stream: true }))
-})
+// CSS task
+function css() {
+  return gulp
+    .src("./src/scss/**/*.scss")
+    .pipe(plumber())
+    .pipe(sass({ outputStyle: "expanded" }))
+    .pipe(gulp.dest("./static/css/"))
+    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(gulp.dest("./static/css/"))
+    .pipe(browsersync.stream());
+}
 
-// fonts
-gulp.task('fonts', function () {
-  return gulp.src(sources.fonts)
-    .pipe(gulp.dest(paths.css))
-    .pipe(browserSync.reload({ stream: true }))
-})
+// Transpile, concatenate and minify scripts
+function scripts() {
+  return (
+    gulp
+      .src(["./src/js/**/*"])
+      .pipe(plumber())
+      .pipe(gulp.dest("./static/js/"))
+      .pipe(browsersync.stream())
+  );
+}
 
+// Watch files
+function watchFiles() {
+  gulp.watch("./src/scss/**/*", css);
+  gulp.watch("./src/js/**/*", scripts);
+  gulp.watch("./templates/**/*", browserSyncReload);
+  gulp.watch("./src/img/**/*", images);
+}
 
-// Javascript minification
-gulp.task('scripts', function () {
-  return gulp.src(sources.js)
-    .pipe(plumber()) // Checks for errors
-    .pipe(uglify()) // Minifies the js
-    .pipe(gulp.dest(paths.js))
-    .pipe(concat('app.min.js')) // Concat files
-    .pipe(gulp.dest(paths.js))
-    .pipe(browserSync.reload({ stream: true }))
-})
+// define complex tasks
+const js = scripts;
+const build = gulp.series(clean, gulp.parallel(css, images, js));
+const watch = gulp.parallel(watchFiles, browserSync);
 
-// Run Flask server
-gulp.task('runServer', function() {
-  return new Promise(function(resolve, reject) {
-    cp.exec('python manage.py runserver')
-    resolve()
-  })
-})
-
-// Browser sync server for live reload
-gulp.task('browserSync', function () {
-  browserSync.init(
-    [paths.css + '/*.css', paths.js + '/*.js', paths.templates + '/*.html'],
-    {
-      proxy: 'localhost:5000'
-    }
-  )
-})
-
-// Watch for file changes
-gulp.task('watch', function () {
-  gulp.watch(sources.sass, ['styles'])
-  gulp.watch(sources.js, ['scripts'])
-  gulp.watch(sources.fonts, ['fonts']).on('change', reload)
-  gulp.watch(paths.templates + '/*.html').on('change', reload)
-  gulp.watch(paths.css + '/*.css', browserSync.reload({ stream: true }))
-})
-
-// Build and compile all files
-gulp.task('build', gulp.series('clean', 'styles', 'scripts', 'fonts'))
-
-// Build all files and watches for changes
-gulp.task('build:watch', gulp.parallel('build', 'watch'))
-
-// Build all files, run the server, start BrowserSync and watch for file changes
-gulp.task('default', gulp.series('build', 'runServer', 'browserSync', 'watch'))
-
-// Build all files, start BrowserSync and watch for file changes (use it when you want to start Flask manually)
-gulp.task('dev', gulp.series('build', 'browserSync', 'watch'))
+// export tasks
+exports.images = images;
+exports.css = css;
+exports.js = js;
+exports.clean = clean;
+exports.build = build;
+exports.dev = watch;
+exports.default = watch;
