@@ -2,14 +2,12 @@
 // Load plugins
 const autoprefixer = require("autoprefixer");
 const browsersync = require("browser-sync").create();
-const cp = require("child_process");
 const cssnano = require("cssnano");
 const del = require("del");
 const gulp = require("gulp");
 const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
 const pixrem = require('gulp-pixrem');
-const pjson = require('./package.json');
 const plumber = require("gulp-plumber");
 const postcss = require("gulp-postcss");
 const sass = require("gulp-sass");
@@ -63,7 +61,7 @@ function css() {
     .pipe(plumber())
     .pipe(sass({ outputStyle: "expanded" }))
     .pipe(gulp.dest("./static/css/"))
-    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(postcss([autoprefixer(), pixrem(), cssnano()]))
     .pipe(gulp.dest("./static/css/"))
     .pipe(browsersync.stream());
 }
