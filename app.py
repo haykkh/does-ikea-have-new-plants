@@ -21,7 +21,7 @@ def index():
 
     return render_template(
         "index.html",
-        update = update_today(),
+        update = 'Yes' if update_today() else 'No',
         plants = [(plant.name, plant.url) for plant in Plant.query.limit(10)]
     )
 
