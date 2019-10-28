@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'fixedsys';
+  src: local('Fixedsys Excelsior 3.01'), local('FixedsysExcelsiorIIIb'),
+      url('../fonts/FixedsysExcelsiorIIIb.woff2') format('woff2'),
+      url('../fonts/FixedsysExcelsiorIIIb.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -12,55 +22,83 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     vertical-align: baseline;
   }
   
-  /* HTML5 display-role reset for older browsers */
-  
-  article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-  
-  body {
-    line-height: 1;
-  }
-  
-  ol, ul {
-    list-style: none;
-  }
-  
-  blockquote, q {
-    quotes: none;
-  }
-  
-  blockquote {
-    &:before, &:after {
-      content: '';
-      content: none;
-    }
-  }
-  
-  q {
-    &:before, &:after {
-      content: '';
-      content: none;
-    }
-  }
-  
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
+/* HTML5 display-role reset for older browsers */
 
-  html {
-      margin: auto;
-      width: max-content;
-  }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
 
-  body {
-      margin-top: 50px;
-  }
+body {
+  line-height: 1.4;
+}
 
-  h1 {
-      &#update {
-          font-size: 2rem;
-          font-weight: bold;
-      }
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote {
+  &:before, &:after {
+    content: '';
+    content: none;
   }
+}
+
+q {
+  &:before, &:after {
+    content: '';
+    content: none;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  margin: auto;
+  width: max-content;
+  background: #fff;
+  color: #454545;
+}
+
+body {
+  margin-top: 4rem;
+}
+
+a {
+  text-decoration: none;
+  color:#454545;
+}
+
+h1 {
+  line-height: 1.125;
+  &#update {
+      font-size: 2rem;
+      font-weight: bold;
+      max-width: 20rem;
+  }
+}
+
+section {
+  &#recents {
+    margin-top: 2rem;
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 1rem;
+  font-family: fixedsys;
+  padding: 0.5rem;
+  background-color: #454545;
+  color: #fff;
+
+  .red {
+    color:crimson;
+  }
+}
