@@ -75,6 +75,10 @@ a {
   color:#454545;
 }
 
+main {
+  margin-top: 30vh;
+}
+
 h1 {
   line-height: 1.125;
   &#update {
@@ -87,16 +91,25 @@ h1 {
 section {
   &#recents {
     margin-top: 2rem;
+    font-size: 1rem;
+
+    h2 {
+      font-weight: bold;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
   }
 }
 
 footer {
-  position: absolute;
-  bottom: 1rem;
   font-family: fixedsys;
   padding: 0.5rem;
-  background-color: #454545;
-  color: #fff;
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
 
   .red {
     color:crimson;
