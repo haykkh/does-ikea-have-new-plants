@@ -8,15 +8,18 @@
     <title>Does IKEA have new plants today?</title>
 </head>
 <body>
-    <h1 id="update">{{ update }}</h1>
-    <ul>
-        {% for plant in plants %}
-            <li>
-                <a href={{ plant.1 }}>{{ plant.0 }}</a>
-
-            </li>
-        {% endfor %}
-    </ul>
+    <h1 id="update">{{ update }}, they do not have new plants today.</h1>
+    <section id="recents">
+        <ul>
+            {% for plant in plants %}
+                <li>
+                    <a href={{ plant.1 }}>{{ plant.0 }}</a>
     
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    
+    <footer><span>made with <span class="red">❤</span> by <a class="red" href="https://hayk.io">Հայկ</a></span></footer>
 </body>
 </html>
