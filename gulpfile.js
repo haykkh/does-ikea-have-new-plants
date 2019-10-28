@@ -76,23 +76,33 @@ function scripts() {
   );
 }
 
+// Copy fonts
+function fonts() {
+  return gulp
+    .src("./src/fonts/**/*.woff2", "./src/fonts/**/*.woff", "./src/fonts/**/*.ttf")
+    .pipe(gulp.dest("./static/fonts/"))
+    .pipe(browsersync.stream())
+};
+
 // Watch files
 function watchFiles() {
   gulp.watch("./src/scss/**/*", css);
   gulp.watch("./src/js/**/*", scripts);
   gulp.watch("./templates/**/*", browserSyncReload);
   gulp.watch("./src/img/**/*", images);
+  gulp.watch("./src/fonts/**/*", fonts);
 }
 
 // define complex tasks
 const js = scripts;
-const build = gulp.series(clean, gulp.parallel(css, images, js));
+const build = gulp.series(clean, gulp.parallel(css, images, js, fonts));
 const watch = gulp.parallel(watchFiles, browserSync);
 
 // export tasks
 exports.images = images;
 exports.css = css;
 exports.js = js;
+exports.fonts = fonts;
 exports.clean = clean;
 exports.build = build;
 exports.dev = watch;
