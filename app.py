@@ -21,8 +21,8 @@ def index():
 
     return render_template(
         "index.html",
-        update = 'Yes' if update_today() else 'No',
-        plants = [(plant.name, plant.url) for plant in Plant.query.limit(10)]
+        update = update_today(),
+        plants = [(plant.name, plant.url) for plant in Plant.query.limit(6)]
     )
 
 if __name__ == '__main__':
