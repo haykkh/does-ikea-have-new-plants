@@ -15,20 +15,20 @@
                     {% else %}
                         No, IKEA does not have new plants today.
                     {% endif %}
-                </h1>
-                <section id="recents">
-                    <h2>
-                        Recently added
-                    </h2>
-                    <ul>
-                        {% for plant in plants %}
-                            <li>
-                                <a href={{ plant.1 }}>{{ plant.0 }}</a>
-                
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </section>
+            </h1>
+            <section id="recents">
+                <h2>
+                    Recently added
+                </h2>
+                <ul>
+                    {% for plant in plants %}
+                        <li>
+                            <a href={{ plant.1 }}>{{ plant.0 }}</a>
+            
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
     </main>
 
     
