@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "name": "hyperapp-starter",
-  "description": "Hyperapp PWA starter",
-  "author": "Alexandre Lotte <dev@alexlotte.ca>",
+  "name": "does-ikea-have-new-plants-today",
+  "description": "Checks IKEA UK to see if they have any new plants today.",
+  "author": "Hayk Khachatryan <hi@hayk.io>",
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "parcel build src/index.html --no-source-maps --detailed-report",
@@ -54,6 +54,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/loteoo/react-parcel-starter"
+    "url": "https://github.com/haykkh/does-ikea-have-new-plants-today"
   }
 }
