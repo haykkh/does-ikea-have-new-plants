@@ -10,6 +10,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "hubdb": "^1.1.2",
     "hyperapp": "^2.0.4",
     "sanitize.css": "^11.0.0"
   },
