@@ -1,0 +1,13 @@
+{
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      [
+        "babel-plugin-jsx-pragmatic",
+        {
+          "module": "hyperapp",
+          "import": "h",
+          "export": "h"
+        }
+      ]
+    ]
+}
