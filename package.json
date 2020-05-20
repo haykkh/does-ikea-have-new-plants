@@ -40,6 +40,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "gts": "^2.0.2",
     "parcel": "^1.12.4",
+    "parcel-bundler": "^1.12.4",
     "postcss-modules": "^1.5.0",
     "postcss-nested": "^4.2.1",
     "postcss-preset-env": "^6.7.0",
