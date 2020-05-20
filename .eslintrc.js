@@ -1,11 +1,30 @@
 module.exports = {
-  parser: 'babel-eslint',
+  env: {
+    browser: true,
+    es6: true
+  },
   extends: [
     'standard',
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/recommended'
   ],
-  plugins: ['import', 'react', 'prettier', 'jsx-a11y'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  },
+  plugins: [
+    '@typescript-eslint',
+    '@typescript-eslint/no-unused-vars',
+    'import',
+    'react',
+    'prettier',
+    'jsx-a11y'
+  ],
   rules: {
     'no-unused-vars': [2, { varsIgnorePattern: 'React|jsx|h' }],
     'react/jsx-uses-vars': 2,
