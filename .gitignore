@@ -141,6 +141,7 @@ dist
 .yarn/build-state.yml
 .pnp.*
 
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
