@@ -14,17 +14,10 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2019,
     sourceType: 'module'
   },
-  plugins: [
-    '@typescript-eslint',
-    '@typescript-eslint/no-unused-vars',
-    'import',
-    'react',
-    'prettier',
-    'jsx-a11y'
-  ],
+  plugins: ['@typescript-eslint', 'import', 'react', 'prettier', 'jsx-a11y'],
   rules: {
     'no-unused-vars': [2, { varsIgnorePattern: 'React|jsx|h' }],
     'react/jsx-uses-vars': 2,
