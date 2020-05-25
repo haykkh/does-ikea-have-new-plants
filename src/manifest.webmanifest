@@ -1,0 +1,13 @@
+{
+  "short_name": "IKEA",
+  "name": "Does IKEA have new plants today?",
+  "description": "Checks IKEA UK to see if they have any new plants today.",
+  "display": "fullscreen",
+  "scope": "/",
+  "start_url": "/",
+  "theme_color": "white",
+  "background_color": "white",
+  "orientation": "portrait",
+  "dir": "ltr",
+  "lang": "en"
+}

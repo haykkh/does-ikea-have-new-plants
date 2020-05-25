@@ -1,0 +1,47 @@
+main {
+  width: max-content;
+  margin: 30vh auto 0 auto;
+  max-width: calc(100vw - 2rem);
+}
+
+h1 {
+  line-height: 1.125;
+  &#update {
+      font-size: 2rem;
+      font-weight: bold;
+  }
+}
+
+section {
+  &#recents {
+    font-size: 1rem;
+    margin: 2rem auto 0 auto;
+    max-width: max-content;
+
+    h2 {
+      font-weight: bold;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+  }
+}
+
+footer {
+  font-family: fixedsys;
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
+
+  .red {
+    color:crimson;
+  }
+}
