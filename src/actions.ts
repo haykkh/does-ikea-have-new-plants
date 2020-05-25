@@ -6,6 +6,7 @@
  * @requires     types.ts
  */
 
+// eslint-disable-next-line no-unused-vars
 import { State, Plant } from './types'
 
 /**

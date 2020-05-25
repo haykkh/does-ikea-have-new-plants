@@ -7,6 +7,7 @@
  * @requires     types.ts
  */
 
+// eslint-disable-next-line no-unused-vars
 import { IKEAPlant, IKEAPlantDb, Plant, DatedPlants, PlantDb } from '/types'
 
 const Hubdb = require('hubdb')

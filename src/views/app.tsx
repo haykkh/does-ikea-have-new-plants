@@ -7,6 +7,7 @@
  */
 
 import '/styles/content.scss'
+// eslint-disable-next-line no-unused-vars
 import { Plant, State } from '/types'
 
 /**
@@ -16,7 +17,10 @@ import { Plant, State } from '/types'
  *
  * @returns {JSX.Element} <h1 /> indicating update status
  */
-const UpdateSection = (props: { fetching: boolean; updateToday: boolean }): JSX.Element => (
+const UpdateSection = (props: {
+  fetching: boolean
+  updateToday: boolean
+}): JSX.Element => (
   <h1 id="update">
     {props.fetching
       ? 'Checking'
@@ -33,7 +37,10 @@ const UpdateSection = (props: { fetching: boolean; updateToday: boolean }): JSX.
  *
  * @returns {JSX.Element} <ul /> of recently added plants with <h2 /> title
  */
-const RecentsSection = (props: { fetching: boolean; recents: Plant[] }): JSX.Element =>
+const RecentsSection = (props: {
+  fetching: boolean
+  recents: Plant[]
+}): JSX.Element =>
   props.fetching ? null : (
     <section id="recents">
       <h2>Recently added</h2>
@@ -70,7 +77,7 @@ const Footer = (): JSX.Element => (
  *
  * @param {State} state system state
  *
- * @returns {JSX.Element} <main /> 
+ * @returns {JSX.Element} <main />
  */
 const Main = (state: State): JSX.Element => (
   <main>
