@@ -11,6 +11,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
+    "atob": "^2.1.2",
     "dotenv": "^8.2.0",
     "hubdb": "^1.1.2",
     "hyperapp": "^2.0.4",
